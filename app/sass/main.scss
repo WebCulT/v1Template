@@ -1,4 +1,5 @@
-@include font-face("roboto", "../../fonts/RobotoRegular/RobotoRegular")
+/* ============ FONTS ============= */
+@import "_layout/fonts";
 
 /* ========== ALL LIBRARIES  =========== */
 @import "_layout/libs";
@@ -7,7 +8,6 @@
 @import "_layout/default";
 
 /* =========== BLOCKS ============ */
-
 @import "_blocks/header";
 
 

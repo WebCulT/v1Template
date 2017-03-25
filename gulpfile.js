@@ -15,51 +15,55 @@ var gulp 					= require('gulp'),
 		ftp						= require('vinyl-ftp'),
 		notify				= require('gulp-notify');
 
+//these vars are path to your files.
+var myBase = 'app/';
+
 //Project scripts
 
 gulp.task('js', function() {
 	return gulp.src([
-		'app/js/',
+		myBase + 'libs/jquery/dist/jquery.min.js',
+		myBase + 'js/common.js', //Always at the end.
 		])
 	.pipe(concat('scripts.min.js'))
 	//.pipe(uglify()) minimize all js files. 
-	.pipe(gulp.dest('app/js'))
+	.pipe(gulp.dest(myBase + 'js'))
 	.pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('browser-sync', function() {
 	browserSync({
 		server: {
-			baseDir: 'app'
+			baseDir: myBase
 		},
 		notify: false,
 	});
 });
 
 gulp.task('sass', function() {
-	return gulp.src('app/sass/**/*.scss')
+	return gulp.src(myBase + 'sass/**/*.scss')
 	.pipe(sass().on('error', notify.onError()))
 	.pipe(rename({suffix: '.min', prefix: ''}))
 	.pipe(autoprefixer(['last 15 versions']))
 	.pipe(cleanCss())
-	.pipe(gulp.dest('app/css'))
+	.pipe(gulp.dest(myBase + 'css'))
 	.pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('watch', ['sass', 'js', 'browser-sync'], function() {
-	gulp.watch('app/sass/**/*.scss', ['sass']);
+	gulp.watch(myBase + 'sass/**/*.scss', ['sass']);
 	gulp.watch(['libs/**/*.js'], ['js']);
-	gulp.watch('app/*.html', browserSync.reload);
+	gulp.watch(myBase + '*.html', browserSync.reload);
 });
 
 gulp.task('imagemin', function() {
-	return gulp.src('app/img/**/*')
+	return gulp.src(myBase + 'img/**/*')
 	.pipe(cache(imagemin()))
 	.pipe(gulp.dest('dist/img')); 
 });
 
 gulp.task('svgmin', function() {
-	return gulp.src('app/img/**/*.svg')
+	return gulp.src(myBase + 'img/**/*.svg')
 	.pipe(svgmin())
 	.pipe(gulp.dest('dist/img/svg'));
 });
@@ -67,22 +71,22 @@ gulp.task('svgmin', function() {
 gulp.task('build', ['removedist', 'imagemin','svgmin','sass', 'js'], function() {
 
 	var buildFiles = gulp.src([
-		'app/*.html',
-		'app/.htaccess',
+		myBase + '*.html',
+		myBase + '.htaccess',
 		]).pipe(gulp.dest('dist'));
 
 	var buildCss = gulp.src([
-		'app/css/main.min.css',
+		myBase + 'css/main.min.css',
 		])
 		.pipe(groupMedia())
 		.pipe(gulp.dest('dist/css'));
 
 	var buildJs = gulp.src([
-		'app/js/scripts.min.js',
+		myBase + 'js/scripts.min.js',
 		]).pipe(gulp.dest('dist/js'));
 
 	var buildFonts = gulp.src([
-		'app/fonts/**/*',
+		myBase + 'fonts/**/*',
 		]).pipe(gulp.dest('dist/fonts'));
 
 });

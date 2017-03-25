@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WebCult/template.git"
+    "url": "git+https://github.com/WebCult/v1Template.git"
   },
   "keywords": [
     "template"
@@ -16,9 +16,9 @@
   "author": "WebKoala",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WebCult/template/issues"
+    "url": "https://github.com/WebCult/v1Template/issues"
   },
-  "homepage": "https://github.com/WebCult/template#readme",
+  "homepage": "https://github.com/WebCult/v1Template#readme",
   "devDependencies": {
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
