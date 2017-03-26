@@ -52,7 +52,7 @@ gulp.task('sass', function() {
 
 gulp.task('watch', ['sass', 'js', 'browser-sync'], function() {
 	gulp.watch(myBase + 'sass/**/*.scss', ['sass']);
-	gulp.watch(['libs/**/*.js'], ['js']);
+	gulp.watch(['libs/**/*.js', myBase + '/js/common.js'], ['js']);
 	gulp.watch(myBase + '*.html', browserSync.reload);
 });
 
